@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glider Tycoon - Flight Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game-canvas"></canvas>
+
+    <!-- In-Flight HUD -->
+    <div id="hud" class="hidden">
+      <div id="hud-left">
+        <div class="instrument" id="altimeter">
+          <div class="inst-label">ALT</div>
+          <div class="inst-value" id="alt-value">0</div>
+          <div class="inst-unit">m</div>
+        </div>
+        <div class="instrument" id="variometer">
+          <div class="inst-label">VARIO</div>
+          <div class="vario-bar-container">
+            <div class="vario-bar" id="vario-bar"></div>
+            <div class="vario-zero"></div>
+          </div>
+          <div class="inst-value" id="vario-value">0.0</div>
+          <div class="inst-unit">m/s</div>
+        </div>
+      </div>
+
+      <div id="hud-right">
+        <canvas id="minimap" width="200" height="200"></canvas>
+        <div class="instrument" id="speedometer">
+          <div class="inst-label">IAS</div>
+          <div class="inst-value" id="speed-value">0</div>
+          <div class="inst-unit">km/h</div>
+        </div>
+        <div class="instrument" id="temp-gauge">
+          <div class="inst-label">TEMP</div>
+          <div class="inst-value" id="temp-value">15</div>
+          <div class="inst-unit">°C</div>
+          <div id="temp-warning" class="hidden">⚠ CARGO OVERHEAT</div>
+        </div>
+      </div>
+
+      <div id="hud-bottom">
+        <div id="mission-info"></div>
+        <div id="biome-info"></div>
+      </div>
+
+      <div id="hud-center">
+        <div id="stall-warning" class="hidden">STALL</div>
+        <div id="pull-up-warning" class="hidden">PULL UP</div>
+      </div>
+    </div>
+
+    <!-- Landed Menu Overlay -->
+    <div id="landed-menu">
+      <div id="menu-header">
+        <h1>GLIDER TYCOON</h1>
+        <div id="airport-info">
+          <span id="airport-name">Starting Airport</span>
+          <span id="player-money">$1000</span>
+        </div>
+      </div>
+
+      <div id="menu-tabs">
+        <button class="tab-btn active" data-tab="launch">Launch</button>
+        <button class="tab-btn" data-tab="market">Market</button>
+        <button class="tab-btn" data-tab="missions">Missions</button>
+        <button class="tab-btn" data-tab="builder">Builder</button>
+        <button class="tab-btn" data-tab="restart">Restart</button>
+      </div>
+
+      <div id="tab-content">
+        <!-- Launch Tab -->
+        <div class="tab-panel active" id="tab-launch">
+          <h2>Launch Options</h2>
+          <div class="launch-options">
+            <button class="launch-btn" id="btn-cable-launch">
+              <div class="launch-title">Cable Launch</div>
+              <div class="launch-desc">Free | +300m altitude</div>
+            </button>
+            <button class="launch-btn" id="btn-aerotow">
+              <div class="launch-title">Aerotow</div>
+              <div class="launch-desc">$100 | +1500m altitude</div>
+            </button>
+          </div>
+          <div id="cargo-summary">
+            <h3>Current Cargo</h3>
+            <div id="cargo-list">Empty</div>
+            <div id="plane-weight">Plane Weight: 300 kg</div>
+          </div>
+        </div>
+
+        <!-- Market Tab -->
+        <div class="tab-panel" id="tab-market">
+          <h2>Commodity Market</h2>
+          <div id="market-grid"></div>
+        </div>
+
+        <!-- Missions Tab -->
+        <div class="tab-panel" id="tab-missions">
+          <h2>Mission Board</h2>
+          <div id="mission-list"></div>
+        </div>
+
+        <!-- Builder Tab -->
+        <div class="tab-panel" id="tab-builder">
+          <h2>Plane Customization</h2>
+          <div id="builder-grid">
+            <div class="builder-section">
+              <h3>Fuselage</h3>
+              <div class="part-options" id="fuselage-options"></div>
+            </div>
+            <div class="builder-section">
+              <h3>Wings</h3>
+              <div class="part-options" id="wing-options"></div>
+            </div>
+            <div class="builder-section">
+              <h3>Wingtips</h3>
+              <div class="part-options" id="wingtip-options"></div>
+            </div>
+          </div>
+          <div id="builder-stats"></div>
+        </div>
+
+        <!-- Restart Tab -->
+        <div class="tab-panel" id="tab-restart">
+          <h2>Restart Game</h2>
+          <p>This will reset all progress and generate a new world.</p>
+          <button class="danger-btn" id="btn-restart">Confirm Restart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="hidden"></div>
+
+    <!-- Loading Screen -->
+    <div id="loading">
+      <h1>GLIDER TYCOON</h1>
+      <div class="loading-bar"><div class="loading-fill"></div></div>
+      <p>Generating world...</p>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
